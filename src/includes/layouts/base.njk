@@ -1,0 +1,20 @@
+<html lang="{{ site.lang}}">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+        <title>{{ title }} | {{ site.name }}</title>
+        <link rel="stylesheet" href="{{ '/css/main.css' | url }}">
+    </head>
+    <body>
+        <div id="app">
+            {% include "partials/header.njk" %}
+            <div id="main-container" role="document">
+                <main role="main">
+                    {{ content | safe }}
+                </main>
+            </div>
+            {% include "partials/footer.njk" %}
+        </div>
+        <script src="{{ '/js/main.js' | url }}"></script>
+    </body>
+</html>
