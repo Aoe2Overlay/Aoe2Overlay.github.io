@@ -3,6 +3,7 @@ const htmlmin = require('html-minifier');
 function eleventyConfig(config) {
 	// Passthroughs
 	config.addPassthroughCopy("src/img");
+	config.addPassthroughCopy("src/api");
 
 	// Layout aliases
 	config.addLayoutAlias("base", "layouts/base.njk");
