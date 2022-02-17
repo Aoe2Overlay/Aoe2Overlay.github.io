@@ -69,7 +69,8 @@ const createTimeChart = (chartElement, sliderElement, options) => {
                     title: {
                         display: true,
                         text: 'Number of Matches'
-                    }
+                    },
+                    min: 0,
                 },
             },
             plugins: {
@@ -78,7 +79,7 @@ const createTimeChart = (chartElement, sliderElement, options) => {
                 },
                 title: {
                     display: true,
-                    text: 'Match Rate (RM)'
+                    text: 'Match Rate - Ranked RM'
                 },
             },
         }
@@ -126,7 +127,7 @@ const createTimeChart = (chartElement, sliderElement, options) => {
             stack: stack,
             borderColor: color,
             backgroundColor: color,
-            fill: false
+            fill: true
         })
     }
 
