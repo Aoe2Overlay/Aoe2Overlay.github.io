@@ -32,7 +32,7 @@ const createTimeChart = (chartElement, sliderElement, options) => {
         noUiSlider.create(sliderElement, {
             start: [min, max],
             step: 1,
-            margin: 1,
+            margin: 0,
             tooltips: [tooltipFormat, tooltipFormat],
             connect: true,
             range: {
@@ -59,9 +59,10 @@ const createTimeChart = (chartElement, sliderElement, options) => {
                         display: false,
                         text: 'Date'
                     },
-                    // time: {
-                    //     unit: 'month',
-                    // },
+                    time: {
+                        // unit: 'month',
+                        minUnit: 'day'
+                    },
                 },
                 y: { 
                     stacked: true,
@@ -132,11 +133,18 @@ const createTimeChart = (chartElement, sliderElement, options) => {
 
     obj.slider.on('change', () => {
         let i = sliderElement.noUiSlider.get().map(i => parseInt(i));
-        let from = sliderLabels[i[0]];
-        let to = sliderLabels[i[1]];
-        obj.chart.data.labels = createChartLabels(from, to);
-        obj.chart.options.scales.x.ticks.min = from;
-        obj.chart.options.scales.x.ticks.max = to;
+        let from = new Date(sliderLabels[i[0]]);
+        let to = new Date(sliderLabels[i[1]]);
+
+        to.setMonth(to.getMonth() + 1);
+
+        let createFrom = i[0] == 0 ? null : from;
+        let createTo = i[1] == sliderLabels.length-1 ? null : to;
+
+        obj.chart.data.labels = createChartLabels(createFrom, createTo);
+
+        // obj.chart.options.scales.x.ticks.min = from;
+        // obj.chart.options.scales.x.ticks.max = to;
 
         obj.datasets.forEach((data, i) => {
             obj.chart.data.datasets[i].data = data.filter(($) => {

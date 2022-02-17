@@ -3,7 +3,7 @@ const createSliderLabels = (from, to) => {
     from = from || firstMatchDate();
     to = to || yesterdayDate();
     const labels = [];
-    while(from.getTime() < to.getTime()) {
+    while(from.getTime() <= to.getTime()) {
         labels.push(from);
         from = new Date(from);
         from.setMonth(from.getMonth() + 1);

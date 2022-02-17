@@ -9,6 +9,6 @@ const { createTimeChart } = require('./utils/timeChart');
     const chart = createTimeChart(chartElement, sliderElement);
 
     chart.addDataset(await fetchJson('/api/matchrate/rm1vs1.json'), "RM 1vs1", "#dc0ab4", "rm-1vs1");
-    chart.addVersionAnnotations(await fetchJson('/api/matchrate/versions.json'));
+    // chart.addVersionAnnotations(await fetchJson('/api/versions.json'));
     chart.update();
 })();
