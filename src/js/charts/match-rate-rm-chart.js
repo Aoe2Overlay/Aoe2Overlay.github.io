@@ -11,6 +11,8 @@ const { color } = require('./utils/colors');
 
     chart.addDataset(await fetchJson('/api/matchrate/rm1vs1.json'), "RM 1vs1", color(), "rm");
     chart.addDataset(await fetchJson('/api/matchrate/rm2vs2.json'), "RM 2vs2", color(), "rm");
+    chart.addDataset(await fetchJson('/api/matchrate/rm3vs3.json'), "RM 3vs3", color(), "rm");
+    chart.addDataset(await fetchJson('/api/matchrate/rm4vs4.json'), "RM 4vs4", color(), "rm");
     // chart.addVersionAnnotations(await fetchJson('/api/versions.json'));
     chart.update();
 })();
