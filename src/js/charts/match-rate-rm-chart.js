@@ -1,18 +1,17 @@
 const { fetchJson } = require('./utils/fetchJson');
 const { createTimeChart } = require('./utils/timeChart');
-const { color } = require('./utils/colors');
+const { createPalette } = require('./utils/colors');
 
 (async () => {
     const chartElement = document.getElementById("match-rate-rm-chart");
-    const sliderElement = document.getElementById('slider');
+    const sliderElement = document.getElementById('match-rate-rm-slider');
     if(!chartElement) return;
     
-    const chart = createTimeChart(chartElement, sliderElement);
+    const chart = createTimeChart(chartElement, sliderElement, {title: 'Match Rate - Ranked RM'});
 
-    chart.addDataset(await fetchJson('/api/matchrate/rm1vs1.json'), "RM 1vs1", color(), "rm");
-    chart.addDataset(await fetchJson('/api/matchrate/rm2vs2.json'), "RM 2vs2", color(), "rm");
-    chart.addDataset(await fetchJson('/api/matchrate/rm3vs3.json'), "RM 3vs3", color(), "rm");
-    chart.addDataset(await fetchJson('/api/matchrate/rm4vs4.json'), "RM 4vs4", color(), "rm");
-    // chart.addVersionAnnotations(await fetchJson('/api/versions.json'));
+    const palette = createPalette();
+    chart.addTotal(await fetchJson('/api/matchrate/rmtotal.json'), "RM Total", '#888888', "total");
+    chart.addDataset(await fetchJson('/api/matchrate/rmteam.json'), "RM Team", palette.color(), "stack");
+    chart.addDataset(await fetchJson('/api/matchrate/rm1vs1.json'), "RM 1vs1", palette.color(), "stack");
     chart.update();
 })();

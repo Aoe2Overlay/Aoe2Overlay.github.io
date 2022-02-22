@@ -78,14 +78,14 @@ const createTimeChart = (chartElement, sliderElement, options) => {
                 annotation: { 
                 },
                 title: {
-                    display: true,
-                    text: 'Match Rate - Ranked RM'
+                    display: !!options.title,
+                    text: options.title
                 },
             },
         }
     });
 
-    obj.addVersionAnnotations = (data) => {
+    obj.addVersions = (data) => {
         obj.annotations.push(data);
         let annotations = obj.chart.options.plugins.annotation.annotations;
         data.forEach((item, i) => {
@@ -126,8 +126,22 @@ const createTimeChart = (chartElement, sliderElement, options) => {
             type: 'line',
             stack: stack,
             borderColor: color,
-            backgroundColor: color,
+            backgroundColor: color+'66',
             fill: true
+        })
+    }
+
+    obj.addTotal = (data, label, color, stack) => {
+        obj.datasets.push(data.map($ => {return {x: stringToDate($.date), y: $.count}}));
+        obj.chart.data.datasets.push({
+            data: data.map($ => {return {x: stringToDate($.date), y: $.count}}),
+            label: label,
+            type: 'line',
+            stack: stack,
+            borderColor: color,
+            // borderWidth: 2,
+            backgroundColor: color,
+            fill: false
         })
     }
 
